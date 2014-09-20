@@ -18,6 +18,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         businessesTableView.delegate = self
         businessesTableView.dataSource = self
+        businessesTableView.rowHeight = UITableViewAutomaticDimension
+        businessesTableView.estimatedRowHeight = 100.0
+        
         
         var client = YelpClient()
         
