@@ -16,6 +16,7 @@ class BusinessTableViewCell: UITableViewCell {
     @IBOutlet weak var rankingLabel: UILabel!
     @IBOutlet weak var rankingImageView: UIImageView!
     @IBOutlet weak var nameTextView: UITextField!
+    @IBOutlet weak var addressLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,9 +37,11 @@ class BusinessTableViewCell: UITableViewCell {
             distanceLabel.text = ""
         }
         
+        addressLabel.text = "\(business.address!), \(business.neightborhood!)"
+        
         rankingImageView.setImageWithURL(NSURL(string: business.ratingImgURL!))
         
-        thumbnailImageView.layer.cornerRadius = CGFloat(10)
+        thumbnailImageView.layer.cornerRadius = CGFloat(5)
         thumbnailImageView.layer.masksToBounds = true
         thumbnailImageView.setImageWithURLRequest(
             NSURLRequest(URL: NSURL(string: business.imageURL!)),

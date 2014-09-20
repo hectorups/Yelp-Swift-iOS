@@ -40,7 +40,31 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
         client.searchWithTerm("restaurant", sort: YelpClient.Sort.Relevance, success: success, failure: failure)
+        
+        prepareSearchBar()
     }
+    
+    func prepareSearchBar(){
+        var searchBar = UISearchBar(frame: CGRectMake(0.0, 0.0, 300, 44.0))
+        searchBar.autoresizingMask = UIViewAutoresizing.FlexibleRightMargin
+        searchBar.backgroundColor = UIColor.clearColor()
+        self.navigationItem.titleView = searchBar
+        
+        var filterButton = UIButton(frame: CGRectMake(0, 0, 50.0, 44.0))
+        filterButton.setTitle("Filters", forState: UIControlState.Normal)
+        filterButton.titleLabel?.font = UIFont(name: "Helvetica Neue", size: 14.0)
+        filterButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        filterButton.setTitleColor(UIColor.redColor(), forState: UIControlState.Highlighted)
+        
+        let leftHackItem = UIBarButtonItem(customView: filterButton)
+        self.navigationItem.leftBarButtonItem = leftHackItem
+        
+        var emptyView = UIView(frame: CGRectMake(0, 0, 40.0, 44.0))
+        let rightHackItem = UIBarButtonItem(customView: emptyView)
+        self.navigationItem.rightBarButtonItem = rightHackItem
+        
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

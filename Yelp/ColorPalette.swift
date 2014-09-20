@@ -1,0 +1,22 @@
+//
+//  ColorPalette.swift
+//  Yelp
+//
+//  Created by Hector Monserrate on 19/09/14.
+//  Copyright (c) 2014 CodePath. All rights reserved.
+//
+
+import Foundation
+
+enum ColorPalette {
+    case Red, Green
+    
+    func get() -> UIColor {
+        switch self {
+            case .Red:
+                return UIColor(red: 212/255, green: 0.0, blue: 0.0, alpha: 1.0)
+            case .Green:
+                return UIColor(red: 0.0, green: 212/255, blue: 0.0, alpha: 1.0)
+        }
+    }
+}
