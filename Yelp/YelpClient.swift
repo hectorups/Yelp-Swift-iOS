@@ -33,10 +33,8 @@ class YelpClient : BDBOAuth1RequestOperationManager {
     func searchWithTerm(term: NSString, sort: Sort = Sort.Relevance, success: (operation: AFHTTPRequestOperation!,
         responseObject: AnyObject!) -> Void, failure: (operation: AFHTTPRequestOperation!,
         error: NSError!) -> Void) -> AFHTTPRequestOperation {
-            let location = NSString(string: "San Francisco")
             let parameters = [
                 "term": term,
-//                "location": location,
                 "ll": "37.770403,-122.403568",
                 "sort": String(sort.hashValue)
             ]

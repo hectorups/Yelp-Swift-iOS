@@ -9,14 +9,15 @@
 import Foundation
 
 enum ColorPalette {
-    case Red, Green
+    case Red, Gray
     
-    func get() -> UIColor {
+    func get(alpha: CGFloat = 1.0) -> UIColor {
+        
         switch self {
             case .Red:
-                return UIColor(red: 212/255, green: 0.0, blue: 0.0, alpha: 1.0)
-            case .Green:
-                return UIColor(red: 0.0, green: 212/255, blue: 0.0, alpha: 1.0)
+                return UIColor(red: 212/255, green: 0.0, blue: 0.0, alpha: alpha)
+            case .Gray:
+                return UIColor(red: 232/256, green: 232/256, blue: 232/256, alpha: alpha)
         }
     }
 }

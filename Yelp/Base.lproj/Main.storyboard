@@ -40,7 +40,7 @@
                                                     <rect key="frame" x="85" y="8" width="446" height="75"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="1. Business Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASw-y3-L4c">
-                                                            <rect key="frame" x="0.0" y="0.0" width="446" height="21.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="446" height="22"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="uvF-AP-fjZ"/>
                                                             </constraints>
@@ -55,26 +55,29 @@
                                                                 <constraint firstAttribute="height" constant="12" id="d01-lm-QVz"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="100 Reviews" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNv-lH-C0D">
-                                                            <rect key="frame" x="67" y="25" width="71" height="14.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 Reviews" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNv-lH-C0D">
+                                                            <rect key="frame" x="67" y="25" width="71" height="15"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1175 Folsom St, Soma" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ly8-ry-k1y">
-                                                            <rect key="frame" x="0.0" y="38" width="453" height="14.5"/>
+                                                            <rect key="frame" x="0.0" y="38" width="453" height="15"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thai, Asian" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbf-16-4w6">
-                                                            <rect key="frame" x="0.0" y="53" width="446" height="14.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Thai, Asian" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbf-16-4w6">
+                                                            <rect key="frame" x="0.0" y="53" width="446" height="15"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="14.5" id="RJB-an-7AE"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="ASw-y3-L4c" secondAttribute="trailing" id="0u2-Wt-oQ4"/>
                                                         <constraint firstItem="EbT-e4-5fh" firstAttribute="leading" secondItem="ADe-qq-fU1" secondAttribute="leading" id="DP2-X7-E1h"/>
@@ -93,17 +96,17 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4dk-cx-nyj">
-                                                    <rect key="frame" x="528" y="9" width="65" height="33"/>
+                                                    <rect key="frame" x="528" y="9" width="65" height="53"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="0.07 km" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="136" translatesAutoresizingMaskIntoConstraints="NO" id="qfY-bG-e3Q">
-                                                            <rect key="frame" x="-71" y="1" width="136" height="21"/>
+                                                            <rect key="frame" x="0.0" y="2" width="65" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="qfY-bG-e3Q" firstAttribute="top" secondItem="4dk-cx-nyj" secondAttribute="top" id="7FN-iW-xJ7"/>
+                                                        <constraint firstItem="qfY-bG-e3Q" firstAttribute="top" secondItem="4dk-cx-nyj" secondAttribute="top" constant="2" id="7FN-iW-xJ7"/>
                                                         <constraint firstAttribute="width" constant="65" id="VMM-JH-jF1"/>
                                                     </constraints>
                                                 </view>
@@ -123,6 +126,8 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="addressLabel" destination="Ly8-ry-k1y" id="1HA-4Q-imz"/>
+                                            <outlet property="categoriesLabel" destination="gbf-16-4w6" id="jj5-8H-hOh"/>
+                                            <outlet property="contentView" destination="hgK-ch-Asx" id="n0e-o7-9HO"/>
                                             <outlet property="distanceLabel" destination="qfY-bG-e3Q" id="tPk-KK-XVP"/>
                                             <outlet property="nameLabel" destination="ASw-y3-L4c" id="zxL-A0-Im8"/>
                                             <outlet property="rankingImageView" destination="EbT-e4-5fh" id="s57-k4-33b"/>

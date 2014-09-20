@@ -17,6 +17,8 @@ class BusinessTableViewCell: UITableViewCell {
     @IBOutlet weak var rankingImageView: UIImageView!
     @IBOutlet weak var nameTextView: UITextField!
     @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var categoriesLabel: UILabel!
+    @IBOutlet weak var cellContentView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,6 +27,7 @@ class BusinessTableViewCell: UITableViewCell {
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        selectionStyle = UITableViewCellSelectionStyle.None
         
         // Configure the view for the selected state
     }
@@ -38,6 +41,13 @@ class BusinessTableViewCell: UITableViewCell {
         }
         
         addressLabel.text = "\(business.address!), \(business.neightborhood!)"
+        
+        var categoriesText = ""
+        for category in business.categories {
+            categoriesText +=  (categoriesText == "" ? "" : ", ") + category
+        }
+        categoriesLabel.text = categoriesText
+
         
         rankingImageView.setImageWithURL(NSURL(string: business.ratingImgURL!))
         
@@ -54,6 +64,15 @@ class BusinessTableViewCell: UITableViewCell {
             failure: { (request: NSURLRequest!, response: NSHTTPURLResponse!, error: NSError!) in
                 println("Image failed to load")
         })
+    }
+    
+    override func setHighlighted(highlighted: Bool, animated: Bool) {
+
+        if highlighted {
+            contentView.backgroundColor = ColorPalette.Gray.get(alpha: 0.8)
+        } else {
+            contentView.backgroundColor = UIColor.whiteColor()
+        }
     }
     
 }

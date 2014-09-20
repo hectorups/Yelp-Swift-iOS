@@ -21,7 +21,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         businessesTableView.rowHeight = UITableViewAutomaticDimension
         businessesTableView.estimatedRowHeight = 100.0
         
-        
         var client = YelpClient()
         
         let success = { (operation: AFHTTPRequestOperation!,
@@ -47,10 +46,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         prepareSearchBar()
     }
     
+    
     func prepareSearchBar(){
         var searchBar = UISearchBar(frame: CGRectMake(0.0, 0.0, 300, 44.0))
         searchBar.autoresizingMask = UIViewAutoresizing.FlexibleRightMargin
         searchBar.backgroundColor = UIColor.clearColor()
+        searchBar.tintColor = ColorPalette.Red.get()
         self.navigationItem.titleView = searchBar
         
         var filterButton = UIButton(frame: CGRectMake(0, 0, 50.0, 44.0))
