@@ -40,7 +40,15 @@ class BusinessTableViewCell: UITableViewCell {
             distanceLabel.text = ""
         }
         
-        addressLabel.text = "\(business.address!), \(business.neightborhood!)"
+
+        
+        var neightborhood = ""
+        if business.neightborhood != nil {
+            neightborhood = business.neightborhood!
+        }
+        
+        
+        addressLabel.text = business.fullAddress()
         
         var categoriesText = ""
         for category in business.categories {
@@ -48,22 +56,24 @@ class BusinessTableViewCell: UITableViewCell {
         }
         categoriesLabel.text = categoriesText
 
-        
         rankingImageView.setImageWithURL(NSURL(string: business.ratingImgURL!))
         
         thumbnailImageView.layer.cornerRadius = CGFloat(5)
         thumbnailImageView.layer.masksToBounds = true
-        thumbnailImageView.setImageWithURLRequest(
-            NSURLRequest(URL: NSURL(string: business.imageURL!)),
-            placeholderImage: nil,
-            success: { (request: NSURLRequest!, response: NSHTTPURLResponse!, image: UIImage!) in
-                self.thumbnailImageView.alpha = 0.0
-                self.thumbnailImageView.image = image
-                UIView.animateWithDuration(0.5, animations: {self.thumbnailImageView.alpha = 1.0})
-            },
-            failure: { (request: NSURLRequest!, response: NSHTTPURLResponse!, error: NSError!) in
-                println("Image failed to load")
-        })
+        
+        if let imageURL = business.imageURL {
+            thumbnailImageView.setImageWithURLRequest(
+                NSURLRequest(URL: NSURL(string: imageURL)),
+                placeholderImage: nil,
+                success: { (request: NSURLRequest!, response: NSHTTPURLResponse!, image: UIImage!) in
+                    self.thumbnailImageView.alpha = 0.0
+                    self.thumbnailImageView.image = image
+                    UIView.animateWithDuration(0.5, animations: {self.thumbnailImageView.alpha = 1.0})
+                },
+                failure: { (request: NSURLRequest!, response: NSHTTPURLResponse!, error: NSError!) in
+                    println("Image failed to load")
+            })
+        }
     }
     
     override func setHighlighted(highlighted: Bool, animated: Bool) {

@@ -8,10 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate,
+                        UITableViewDelegate, FiltersViewControllerDelegate {
     var businesses = [Business]()
 
     @IBOutlet weak var businessesTableView: UITableView!
+    var searchFilter = SearchFilter()
+    let client = YelpClient()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,15 +24,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         businessesTableView.rowHeight = UITableViewAutomaticDimension
         businessesTableView.estimatedRowHeight = 100.0
         
-        var client = YelpClient()
-        
+        loadBusinesses()
+        prepareSearchBar()
+    }
+    
+    func loadBusinesses(append: Bool = false){
         let success = { (operation: AFHTTPRequestOperation!,
             responseObject: AnyObject!) -> Void in
             
             let json = JSON(responseObject)
             
+            if !append {
+                self.businesses = []
+            }
+            
             for (i, v) in json["businesses"] {
-                println(v)
+//                printltn(v)
                 self.businesses.append(Business(fromJson: v))
             }
             
@@ -38,12 +48,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let failure = { (operation: AFHTTPRequestOperation!,
             error: NSError!) -> Void in
-                println(error)
+            println(error)
         }
         
-        client.searchWithTerm("restaurant", sort: YelpClient.Sort.Relevance, success: success, failure: failure)
-        
-        prepareSearchBar()
+        client.searchWithFilters(searchFilter, success: success, failure: failure)
     }
     
     
@@ -52,21 +60,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         searchBar.autoresizingMask = UIViewAutoresizing.FlexibleRightMargin
         searchBar.backgroundColor = UIColor.clearColor()
         searchBar.tintColor = ColorPalette.Red.get()
+        searchBar.delegate = self
         self.navigationItem.titleView = searchBar
         
-        var filterButton = UIButton(frame: CGRectMake(0, 0, 50.0, 44.0))
-        filterButton.setTitle("Filters", forState: UIControlState.Normal)
-        filterButton.titleLabel?.font = UIFont(name: "Helvetica Neue", size: 14.0)
-        filterButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        filterButton.setTitleColor(UIColor.redColor(), forState: UIControlState.Highlighted)
-        
-        let leftHackItem = UIBarButtonItem(customView: filterButton)
-        self.navigationItem.leftBarButtonItem = leftHackItem
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Filters", style: UIBarButtonItemStyle.Plain, target: self, action: "goToFilters")
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
         
         var emptyView = UIView(frame: CGRectMake(0, 0, 40.0, 44.0))
         let rightHackItem = UIBarButtonItem(customView: emptyView)
         self.navigationItem.rightBarButtonItem = rightHackItem
         
+    }
+    
+    func goToFilters() {
+        println("Button clicked")
+        var filtersController = self.storyboard?.instantiateViewControllerWithIdentifier("FiltersViewController") as FiltersViewController
+        filtersController.searchFilter = searchFilter
+        filtersController.delegate = self
+        self.navigationController?.pushViewController(filtersController, animated: true)
     }
 
 
@@ -87,7 +98,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         return cell
     }
-
+    
+    func applyFilters(updatedSearchFilter: SearchFilter) {
+        println("apply filters")
+        self.searchFilter = updatedSearchFilter
+        loadBusinesses()
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        if countElements(searchText) > 3 {
+            searchFilter.term = searchText
+            loadBusinesses()
+        }
+        
+        if countElements(searchText) == 0 && countElements(searchFilter.term) > 0 {
+            searchFilter.term = ""
+            loadBusinesses()
+        }
+    }
 
 }
 

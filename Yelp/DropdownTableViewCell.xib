@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="DropdownTableViewCell" customModule="Yelp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jdX-Sv-rAb">
+                        <rect key="frame" x="16" y="11" width="240" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="expand_filter" translatesAutoresizingMaskIntoConstraints="NO" id="Z6F-t9-acg">
+                        <rect key="frame" x="273" y="8" width="29" height="28"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="29" id="ewb-Oa-g0f"/>
+                            <constraint firstAttribute="width" secondItem="Z6F-t9-acg" secondAttribute="height" multiplier="29:28" id="peJ-t7-G0t"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Z6F-t9-acg" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-10" id="7ed-o3-bPg"/>
+                    <constraint firstItem="jdX-Sv-rAb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="85i-lc-tGl"/>
+                    <constraint firstItem="jdX-Sv-rAb" firstAttribute="centerY" secondItem="Z6F-t9-acg" secondAttribute="centerY" constant="-0.5" id="Gs6-R5-qpU"/>
+                    <constraint firstItem="Z6F-t9-acg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="NoE-ps-80u"/>
+                    <constraint firstItem="jdX-Sv-rAb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="ZKr-MJ-N0Y"/>
+                    <constraint firstItem="Z6F-t9-acg" firstAttribute="leading" secondItem="jdX-Sv-rAb" secondAttribute="trailing" constant="17" id="dqC-tX-pF4"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="jdX-Sv-rAb" secondAttribute="bottom" constant="4" id="kja-76-EOx"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="rightImageView" destination="Z6F-t9-acg" id="pmS-mi-G3K"/>
+                <outlet property="titleLabel" destination="jdX-Sv-rAb" id="RjF-E9-e9B"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="expand_filter" width="600" height="600"/>
+    </resources>
+</document>

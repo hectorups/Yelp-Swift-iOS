@@ -52,5 +52,21 @@ struct Business {
         
     }
     
+    func fullAddress() -> String {
+        var fullAddress = ""
+        if address != nil {
+            fullAddress += address!
+        }
+        
+        if neightborhood != nil {
+            if countElements(fullAddress) > 0 {
+                fullAddress += ", "
+            }
+            fullAddress += neightborhood!
+        }
+        
+        return fullAddress
+    }
+    
     
 }

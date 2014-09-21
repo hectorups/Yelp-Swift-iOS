@@ -153,7 +153,41 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="951" y="85"/>
+            <point key="canvasLocation" x="650" y="125"/>
+        </scene>
+        <!--Filters View Controller-->
+        <scene sceneID="ZKv-ed-R6W">
+            <objects>
+                <viewController storyboardIdentifier="FiltersViewController" id="IUV-Cb-w1z" customClass="FiltersViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2rO-1Z-k6E"/>
+                        <viewControllerLayoutGuide type="bottom" id="zua-cp-yyc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sB9-Hc-sEg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="aBH-Qr-c1e">
+                                <rect key="frame" x="5" y="0.0" width="600" height="612"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <sections/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="aBH-Qr-c1e" firstAttribute="top" secondItem="sB9-Hc-sEg" secondAttribute="topMargin" id="8gE-Kn-3WQ"/>
+                            <constraint firstItem="aBH-Qr-c1e" firstAttribute="leading" secondItem="sB9-Hc-sEg" secondAttribute="leadingMargin" constant="-11" id="D9k-G7-TTF"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="aBH-Qr-c1e" secondAttribute="bottom" constant="-12" id="rVc-Sm-e1o"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="aBH-Qr-c1e" secondAttribute="trailing" constant="-21" id="xcP-wO-jcx"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="aBH-Qr-c1e" id="OBD-nn-cIF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B6G-BZ-bhk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1368" y="125"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FPh-4d-cey">
@@ -172,7 +206,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vaC-Y0-qyu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="131"/>
+            <point key="canvasLocation" x="0.0" y="125"/>
         </scene>
     </scenes>
 </document>

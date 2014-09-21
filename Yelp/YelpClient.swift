@@ -17,7 +17,64 @@ class YelpClient : BDBOAuth1RequestOperationManager {
     let tokenSecret = "eKi3M8SPHF67sra_jk0edvj_uoM"
     
     enum Sort: Int {
-        case Relevance = 0, Distance, Rated
+        case Relevance = 0, Distance, Rated, Count
+        
+        func toText() -> String {
+            switch self {
+            case .Distance:
+                return "Distance"
+            case .Rated:
+                return "Rated"
+            default:
+                return "Relevance"
+            }
+        }
+    }
+    
+    enum Distance : Int {
+        case Auto = 0, Hundred, Thousand, FiveThousand, Count
+        
+        func toText() -> String {
+            switch self {
+            case .Hundred:
+                return "100"
+            case .Thousand:
+                return "1000"
+            case .FiveThousand:
+                return "5000"
+            default:
+                return "Auto"
+            }
+        }
+        
+        func toMeters() -> Int {
+            switch self {
+            case .Hundred:
+                return 100
+            case .Thousand:
+                return 1000
+            case .FiveThousand:
+                return 5000
+            default:
+                return 1000
+            }
+        }
+    }
+    
+    enum Cagegory : Int {
+        case Active = 0, Arts, Auto, BeautySvc, Education, EventServices,
+        FinantialServices, Food, Health, HomeServices, HotelsTravel, LocalFlavor,
+        LocalServices, MassMedia, Nightlive, Pets, Professional, PublicServicesGovt,
+        RealState, ReligiousOrgs, Restaurants, Shopping, Count
+        
+        func toText() -> String {
+            let dictionary = ["Active", "Arts", "Auto", "Beauty", "Education", "Event Services",
+                "Finantial Services", "Food", "Health", "Home Services", "Hotels Travel", "Local Flavor",
+                "Local Services", "Mass Media", "Nightlive", "Pets", "Professional", "Public Services",
+                "Real State", "Religious Orgs", "Restaurants", "Shopping"]
+            
+            return dictionary[self.hashValue]
+        }
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -30,14 +87,30 @@ class YelpClient : BDBOAuth1RequestOperationManager {
         requestSerializer.saveAccessToken(oauthToken)
     }
     
-    func searchWithTerm(term: NSString, sort: Sort = Sort.Relevance, success: (operation: AFHTTPRequestOperation!,
+    func searchWithFilters(searchFilter: SearchFilter,
+        success: (operation: AFHTTPRequestOperation!,
         responseObject: AnyObject!) -> Void, failure: (operation: AFHTTPRequestOperation!,
         error: NSError!) -> Void) -> AFHTTPRequestOperation {
-            let parameters = [
-                "term": term,
+            
+            var parameters = [
+                "term": searchFilter.term,
                 "ll": "37.770403,-122.403568",
-                "sort": String(sort.hashValue)
+                "sort": String(searchFilter.sort.hashValue)
             ]
+            
+            if searchFilter.category != YelpClient.Cagegory.Auto {
+                parameters["category_filter"] = "bars"
+            }
+            
+            if searchFilter.deals {
+                parameters["deals_filter"] = "true"
+            }
+            
+            if searchFilter.distance != YelpClient.Distance.Auto {
+                parameters["radius_filter"] = "\(searchFilter.distance.toMeters())"
+            }
+            
+            println("search with params: \(parameters)")
             
             return GET("search", parameters: parameters, success: success, failure: failure)
     }
