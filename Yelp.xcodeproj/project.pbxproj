@@ -12,6 +12,7 @@
 		9533207419CB71B8001C1589 /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9533207319CB71B8001C1589 /* Business.swift */; };
 		9533207619CB8E41001C1589 /* BusinessTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9533207519CB8E41001C1589 /* BusinessTableViewCell.swift */; };
 		9533207819CCD796001C1589 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9533207719CCD796001C1589 /* ColorPalette.swift */; };
+		9577E00219D11438008BA939 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9577E00119D11438008BA939 /* CoreLocation.framework */; };
 		957FE5CD19CB3CF100933738 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957FE5CC19CB3CF100933738 /* AppDelegate.swift */; };
 		957FE5CF19CB3CF100933738 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957FE5CE19CB3CF100933738 /* ViewController.swift */; };
 		957FE5D219CB3CF100933738 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 957FE5D019CB3CF100933738 /* Main.storyboard */; };
@@ -47,6 +48,7 @@
 		9533207319CB71B8001C1589 /* Business.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Business.swift; sourceTree = "<group>"; };
 		9533207519CB8E41001C1589 /* BusinessTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessTableViewCell.swift; sourceTree = "<group>"; };
 		9533207719CCD796001C1589 /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
+		9577E00119D11438008BA939 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		957FE5C719CB3CF100933738 /* Yelp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yelp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		957FE5CB19CB3CF100933738 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		957FE5CC19CB3CF100933738 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9577E00219D11438008BA939 /* CoreLocation.framework in Frameworks */,
 				A72F4F0F1AB84426BDB49ABF /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,6 +93,7 @@
 		3107940215124C4BBD51E9BC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9577E00119D11438008BA939 /* CoreLocation.framework */,
 				53A264292E4B4A9C8C6EF7C0 /* libPods.a */,
 			);
 			name = Frameworks;

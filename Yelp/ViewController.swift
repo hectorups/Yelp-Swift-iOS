@@ -15,6 +15,9 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
     @IBOutlet weak var businessesTableView: UITableView!
     var searchFilter = SearchFilter()
     let client = YelpClient()
+    let RESULTS_LIMIT = 20
+    var endResults = false
+    var searching = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,24 +37,54 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
             
             let json = JSON(responseObject)
             
+            println("Results: " + String(json["businesses"].asArray!.count) )
+            
             if !append {
                 self.businesses = []
+            } else {
+                self.endResults = json["businesses"].asArray!.count != self.RESULTS_LIMIT
+            }
+            
+            if self.endResults {
+                self.businessesTableView.tableFooterView = nil
+            } else {
+                self.showFooterSpinner()
             }
             
             for (i, v) in json["businesses"] {
-//                printltn(v)
                 self.businesses.append(Business(fromJson: v))
             }
             
+            if !append {
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
+            }
             self.businessesTableView.reloadData()
+            self.searching = false
+            
+            if !append {
+//                setContentOffset:CGPointZero animated:YES
+//                NSIndexPath *topPath = [NSIndexPath indexPathForRow:0 inSection:0]
+                let topPath = NSIndexPath(forRow: 0, inSection: 0)
+                self.businessesTableView.scrollToRowAtIndexPath(topPath, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+            }
         }
         
         let failure = { (operation: AFHTTPRequestOperation!,
             error: NSError!) -> Void in
             println(error)
+            if !append {
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
+            }
+            self.searching = false
         }
         
-        client.searchWithFilters(searchFilter, success: success, failure: failure)
+        var offset = append ? businesses.count : 0
+        
+        if !append {
+            MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        }
+        searching = true
+        client.searchWithFilters(searchFilter, limit: RESULTS_LIMIT, offset: offset, success: success, failure: failure)
     }
     
     
@@ -96,6 +129,12 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
         let business = businesses[indexPath.row]
         cell.updateCell(business, number: indexPath.row + 1)
         
+        if !endResults
+            && !searching
+            && businesses.count - indexPath.row < 2 {
+            loadBusinesses(append: true)
+        }
+        
         return cell
     }
     
@@ -106,6 +145,11 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searching {
+            return
+        }
+        
         if countElements(searchText) > 3 {
             searchFilter.term = searchText
             loadBusinesses()
@@ -115,6 +159,13 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
             searchFilter.term = ""
             loadBusinesses()
         }
+    }
+    
+    func showFooterSpinner() {
+        let spinner = UIActivityIndicatorView(frame: CGRectMake(0, 0, 320, 44))
+        spinner.startAnimating()
+        spinner.color = ColorPalette.Red.get()
+        businessesTableView.tableFooterView = spinner
     }
 
 }

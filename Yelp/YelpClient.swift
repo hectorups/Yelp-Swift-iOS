@@ -96,7 +96,7 @@ class YelpClient : BDBOAuth1RequestOperationManager {
         requestSerializer.saveAccessToken(oauthToken)
     }
     
-    func searchWithFilters(searchFilter: SearchFilter,
+    func searchWithFilters(searchFilter: SearchFilter, limit: Int, offset: Int,
         success: (operation: AFHTTPRequestOperation!,
         responseObject: AnyObject!) -> Void, failure: (operation: AFHTTPRequestOperation!,
         error: NSError!) -> Void) -> AFHTTPRequestOperation {
@@ -104,7 +104,9 @@ class YelpClient : BDBOAuth1RequestOperationManager {
             var parameters = [
                 "term": searchFilter.term,
                 "ll": "37.770403,-122.403568",
-                "sort": String(searchFilter.sort.hashValue)
+                "sort": String(searchFilter.sort.hashValue),
+                "limit": "\(limit)",
+                "offset": "\(offset)"
             ]
             
             if !searchFilter.categories.isEmpty {
