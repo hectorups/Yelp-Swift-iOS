@@ -21,6 +21,8 @@ class FiltersViewController: UIViewController, UITableViewDataSource,
     var selectedValues = [Int: Int]()
     var searchFilter = SearchFilter()
     
+    let MAX_CATEGORIES = 4
+    
     enum FilterType : Int {
         case Distance = 0, Sort, Deals, Category, Count
         
@@ -109,6 +111,8 @@ class FiltersViewController: UIViewController, UITableViewDataSource,
         case .Category:
             if isSectionExpanded(section) {
                 return YelpClient.Cagegory.Count.hashValue
+            } else {
+                return MAX_CATEGORIES + 1
             }
         default:
             NSException(name: NSInvalidArgumentException, reason: "invalid section \(section)", userInfo: nil).raise()
@@ -141,6 +145,10 @@ class FiltersViewController: UIViewController, UITableViewDataSource,
             switchCell.settingSwitch.on = searchFilter.deals
             switchCell.delegate = self
             return switchCell
+        } else if( filterType == FilterType.Category
+            && !isSectionExpanded(section)
+            && row == MAX_CATEGORIES ){
+            return reusableTableCell("MoreCategoriesTableViewCell")
         }
         
         let cell = reusableTableCell("DropdownTableViewCell") as DropdownTableViewCell
@@ -172,15 +180,11 @@ class FiltersViewController: UIViewController, UITableViewDataSource,
                 cellText = searchFilter.sort.toText()
             }
         case .Category:
-            if isSectionExpanded(section) {
-                cellText = YelpClient.Cagegory.fromRaw(row)?.toText()
-                if row == searchFilter.category.hashValue {
-                    cell.selected()
-                } else {
-                    cell.unSelected()
-                }
+            cellText = YelpClient.Cagegory.fromRaw(row)?.toText()
+            if searchFilter.hasCategory(YelpClient.Cagegory.fromRaw(row)!){
+                cell.selected()
             } else {
-                cellText = searchFilter.category.toText()
+                cell.unSelected()
             }
         default:
             NSException(name: NSInvalidArgumentException, reason: "invalid section \(section)", userInfo: nil).raise()
@@ -188,7 +192,7 @@ class FiltersViewController: UIViewController, UITableViewDataSource,
         
         cell.titleLabel.text = cellText!
         
-        if !isSectionExpanded(section) {
+        if !isSectionExpanded(section) && filterType != FilterType.Category {
             cell.condensed()
         }
         
@@ -200,21 +204,36 @@ class FiltersViewController: UIViewController, UITableViewDataSource,
         let row = indexPath.row
         let filterType = FilterType.fromRaw(section)!
         
-        if isSectionExpanded(section) {
+        var willExpand = false
+        
+        if filterType == FilterType.Category {
+            willExpand = row == MAX_CATEGORIES && !isSectionExpanded(section)
+        } else {
+            willExpand = !isSectionExpanded(section)
+        }
+        
+        if willExpand {
+            expandedSections[section] = true
+        } else {
             switch filterType {
             case .Distance:
                 searchFilter.distance = YelpClient.Distance.fromRaw(row)!
             case .Sort:
                 searchFilter.sort = YelpClient.Sort.fromRaw(row)!
             case .Category:
-                searchFilter.category = YelpClient.Cagegory.fromRaw(row)!
+                let selectedCategory = YelpClient.Cagegory.fromRaw(row)!
+                if let index = searchFilter.categoryIndex(selectedCategory) {
+                    searchFilter.categories.removeAtIndex(index)
+                } else {
+                    searchFilter.categories.append(selectedCategory)
+                }
             default:
                 println()
             }
             
-            expandedSections[section] = false
-        } else {
-            expandedSections[section] = true
+            if filterType != FilterType.Category {
+                expandedSections[section] = false
+            }
         }
         
         tableView.reloadSections(NSIndexSet(index: section), withRowAnimation: UITableViewRowAnimation.Automatic)

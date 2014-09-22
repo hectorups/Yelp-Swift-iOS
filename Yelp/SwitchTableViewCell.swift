@@ -25,6 +25,10 @@ class SwitchTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        settingSwitch.onTintColor = ColorPalette.Red.get()
+        settingSwitch.tintColor = ColorPalette.Gray.get()
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

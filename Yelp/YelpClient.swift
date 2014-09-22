@@ -68,10 +68,19 @@ class YelpClient : BDBOAuth1RequestOperationManager {
         RealState, ReligiousOrgs, Restaurants, Shopping, Count
         
         func toText() -> String {
-            let dictionary = ["Active", "Arts", "Auto", "Beauty", "Education", "Event Services",
+            let dictionary = ["Active Live", "Arts", "Auto", "Beauty", "Education", "Event Services",
                 "Finantial Services", "Food", "Health", "Home Services", "Hotels Travel", "Local Flavor",
                 "Local Services", "Mass Media", "Nightlive", "Pets", "Professional", "Public Services",
                 "Real State", "Religious Orgs", "Restaurants", "Shopping"]
+            
+            return dictionary[self.hashValue]
+        }
+        
+        func toApiText() -> String {
+            let dictionary = ["active", "arts", "auto", "beauty", "education", "eventervices",
+                "finantialservices", "food", "health", "homeservices", "hotelstravel", "localflavor",
+                "localservices", "massmedia", "nightlive", "pets", "professional", "publicservices",
+                "realstate", "religiousorgs", "restaurants", "shopping"]
             
             return dictionary[self.hashValue]
         }
@@ -98,8 +107,11 @@ class YelpClient : BDBOAuth1RequestOperationManager {
                 "sort": String(searchFilter.sort.hashValue)
             ]
             
-            if searchFilter.category != YelpClient.Cagegory.Auto {
-                parameters["category_filter"] = "bars"
+            if !searchFilter.categories.isEmpty {
+                let categories = searchFilter.categories.map({ (category: YelpClient.Cagegory) -> String in
+                    category.toApiText()
+                })
+                parameters["category_filter"] = ",".join(categories)
             }
             
             if searchFilter.deals {
