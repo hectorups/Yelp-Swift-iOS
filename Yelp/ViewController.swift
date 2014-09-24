@@ -61,7 +61,7 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
             self.businessesTableView.reloadData()
             self.searching = false
             
-            if !append {
+            if !append && self.businesses.count > 0 {
 //                setContentOffset:CGPointZero animated:YES
 //                NSIndexPath *topPath = [NSIndexPath indexPathForRow:0 inSection:0]
                 let topPath = NSIndexPath(forRow: 0, inSection: 0)
